@@ -540,7 +540,7 @@ $(document).ready(function () {
 
     // profile page
     let originalImageURL = "";
-    let defaultImage = "../../images/avatar.png";
+    let defaultImage = "../../Images/avatar.png";
 
     if (page.includes("Profile.html")) {
         loadUserProfile();

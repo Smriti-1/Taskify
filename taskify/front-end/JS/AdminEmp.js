@@ -360,14 +360,14 @@ $(document).ready(function () {
             $('#emp_phn_num').html("<strong>Phone Number : </strong>" + emp.phoneNum);
             $('#emp_regDate').html("<strong>Joined At : </strong>" + formatCustomDate(emp.registerDate));
 
-            let imageSrc;
+            let Imagesrc;
             if ((emp.profileimg && typeof emp.profileimg === 'string' && emp.profileimg.trim() !== "") || emp.profileImg) {
-                imageSrc = "data:image/jpeg;base64," + (emp.profileimg || emp.profileImg);
+                Imagesrc = "data:image/jpeg;base64," + (emp.profileimg || emp.profileImg);
             } else {
-                imageSrc = "../../images/avatar.png";
+                Imagesrc = "../../Images/avatar.png";
             }
 
-            $('.employee-image img').attr('src', imageSrc);
+            $('.employee-image img').attr('src', Imagesrc);
 
             const modal = new bootstrap.Modal(document.getElementById('viewemployeeModal'));
             modal.show();
