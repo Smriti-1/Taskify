@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taskify - Review & Approval</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet" href="./../../Css/dashboard.css" />
+    <link rel="stylesheet" href="../../Css/index.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="dash-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa fa-check-circle logo-icon"></i>
+                <h1>Taskify</h1>
+            </div>
+
+            <nav class="nav-menu" id="nav-menu">
+            </nav>
+
+          <!-- 
+              -->
+        </aside>
+
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Tasks</h1>
+            </div>
+            <!-- Nav Tabs -->
+            <ul class="nav nav-tabs" id="taskTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="empDone-tab" data-bs-toggle="tab" data-bs-target="#empDone"
+                        type="button" role="tab" aria-controls="empDone" aria-selected="true">
+                        Pending Approval
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="approved-tab" data-bs-toggle="tab" data-bs-target="#approved"
+                        type="button" role="tab" aria-controls="approved" aria-selected="false">
+                        Approved
+                    </button>
+                </li>
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content mt-3" id="taskTabsContent">
+                <!-- empDone for Approval Tab -->
+                <div class="tab-pane fade show active" id="empDone" role="tabpanel" aria-labelledby="empDone-tab">
+                  
+                    <div class="dashboard-grid">
+                        <div class="applications-container">
+                            <div class="card">
+                                <div class="btn-group ">
+                                    <div class="dropdown dropdown-toggle-split">
+                                        <a class="btn btn-outline-primary dropdown-toggle" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Filter By
+                                        </a>
+
+                                        <ul class="dropdown-menu" id="wait-sort-options">
+                                            <li><a class="dropdown-item" data-sort="newest">Newest First</a></li>
+                                            <li><a class="dropdown-item" data-sort="oldest">Oldest First</a></li>
+                                            <li><a class="dropdown-item" data-sort="title-asc">Sort A to Z</a></li>
+                                            <li><a class="dropdown-item" data-sort="title-desc">Sort Z to A</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="dropdown dropdown-toggle-split">
+                                        <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Sort By Priority
+                                        </a>
+
+                                        <ul class="dropdown-menu" id="wait-priority-options">
+                                            <li><a class="dropdown-item" data-priority="high">High</a></li>
+                                            <li><a class="dropdown-item" data-priority="low">Low</a></li>
+                                            <li><a class="dropdown-item" data-priority="normal">Normal</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="dropdown dropdown-toggle-split">
+                                        <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Filter By Email
+                                        </a>
+
+                                        <ul class="dropdown-menu" id="review-sort-by-emp">
+                                        </ul>
+                                    </div>
+
+
+                                    <div class="ms-auto">
+                                        <div class="search-bar" id="waitApp-search-bar">
+                                            <input type="text" placeholder="Search for tasks..."
+                                                id="search_donetask_input" />
+                                            <button class="btn btn-primary" id="search_donetask_btn"> <i
+                                                    class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="applications-container ">
+                              <div id="EmpDoneAlertMsg"></div>
+                            <div class="card">
+                                <table class="application-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Emp Email</th>
+                                            <th>Priority</th>
+                                            <th>Due Date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="empDoneTasks">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Approved Tab -->
+                <div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="approved-tab">
+                    <div class="dashboard-grid">
+                         <div class="applications-container">
+                            <div class="card">
+                                <div class="btn-group ">
+                                    <div class="dropdown dropdown-toggle-split">
+                                        <a class="btn btn-outline-primary dropdown-toggle" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Filter By
+                                        </a>
+
+                                        <ul class="dropdown-menu" id="approved-sort-options">
+                                            <li><a class="dropdown-item" data-sort="newest">Newest First</a></li>
+                                            <li><a class="dropdown-item" data-sort="oldest">Oldest First</a></li>
+                                            <li><a class="dropdown-item" data-sort="title-asc">Sort A to Z</a></li>
+                                            <li><a class="dropdown-item" data-sort="title-desc">Sort Z to A</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="dropdown dropdown-toggle-split">
+                                        <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Sort By Priority
+                                        </a>
+
+                                        <ul class="dropdown-menu" id="approved-priority-options">
+                                            <li><a class="dropdown-item" data-priority="high">High</a></li>
+                                            <li><a class="dropdown-item" data-priority="low">Low</a></li>
+                                            <li><a class="dropdown-item" data-priority="normal">Normal</a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="dropdown dropdown-toggle-split">
+                                        <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                            Filter By Email
+                                        </a>
+
+                                        <ul class="dropdown-menu" id="approve-sort-by-emp">
+                                        </ul>
+                                    </div>
+
+
+                                    <div class="ms-auto">
+                                        <div class="search-bar" id="approvedApp-search-bar">
+                                            <input type="text" placeholder="Search for tasks..."
+                                                id="search_approvedtask_input" />
+                                            <button class="btn btn-primary" id="search_approvedtask_btn"> <i
+                                                    class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="applications-container">
+                            <div id="EmpApprovedAlertMsg"></div>
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2 class="card-title">Approved Tasks</h2>
+                                </div>
+                                <table class="application-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Created At</th>
+                                            <th>Status</th>
+                                            <th>Priority</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="approvedTasks">
+                                        <!-- Fill dynamically -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+    </div>
+    <!-- View Task Modal -->
+    <div class="modal fade" id="viewAdminTaskModal" tabindex="-1" aria-labelledby="viewTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content shadow-sm rounded-4 border-0">
+                <div class="modal-header bg-primary text-white rounded-top-4">
+                    <h5 class="modal-title fw-bold" id="viewTaskModalLabel">
+                        <i class="fas fa-list-alt me-2"></i> <span id="modal-task-title"></span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body bg-white px-4 py-4">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <p><i class="fas fa-tags me-2 text-primary"></i><strong>Category:</strong> <span
+                                    id="modal-task-category"></span></p>
+                        </div>
+                        <div class="col-12">
+                            <p><i class="fas fa-comment-dots me-2 text-primary"></i><strong>Description:</strong> <span
+                                    id="modal-task-description"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><i class="fas fa-check-circle me-2 text-primary"></i><strong>Status:</strong> <span
+                                    id="modal-task-status"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><i class="fas fa-bolt me-2 text-primary"></i><strong>Priority:</strong> <span
+                                    id="modal-task-priority"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><i class="fas fa-calendar-plus me-2 text-primary"></i><strong>Created:</strong> <span
+                                    id="modal-task-created"></span></p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><i class="fas fa-calendar-alt me-2 text-primary"></i><strong>Due Date:</strong> <span
+                                    id="modal-task-due"></span></p>
+                        </div>
+                        <div class="col-12">
+                            <p><i class="fas fa-comment-dots me-2 text-primary"></i><strong>User Remark:</strong> <span
+                                    id="modal-task-userRemark"></span></p>
+                        </div>
+                        <div class="col-12">
+                            <p><i class="fas fa-user-shield me-2 text-primary"></i><strong>Admin Remark:</strong> <span
+                                    id="modal-task-adminRemark"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Approve Task Modal -->
+<div class="modal fade" id="approveTaskModal" tabindex="-1" aria-labelledby="approveTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content shadow-sm rounded-4 border-0">
+            <div class="modal-header bg-success text-white rounded-top-4">
+                <h5 class="modal-title fw-bold" id="approveTaskModalLabel">
+                    <i class="fas fa-check me-2"></i>Approve Task
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body bg-white px-4 py-3">
+                <form id="approveTaskForm">
+                    <div id="EmpDoneModalAlertMsg"></div>
+                    <div class="mb-3">
+                        <label for="taskStatus" class="form-label">Select Status</label>
+                        <select class="form-select" id="taskStatus" >
+                            <option value="">-- Choose --</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Redo">Redo</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="adminRemark" class="form-label">Admin Remark</label>
+                        <textarea class="form-control" id="adminRemark" rows="3"
+                            placeholder="Enter your remarks..." ></textarea>
+                    </div>
+
+                    <input type="hidden" id="approveTaskId" />
+                </form>
+            </div>
+            <div class="modal-footer bg-light">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" id="approveDoneTask">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../../JS/AdminEmp.js"></script>
+</body>
+
+</html>
